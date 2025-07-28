@@ -19,7 +19,7 @@ export const Rubros = () => {
         {
             rubros.map((rubro) => (
                 <div key={rubro.nombre} className='bg-gray-400 p-1 rounded-sm hover:bg-amber-500 cursor-pointer'>
-                    <p className='text-gray-700 font-bold hover:text-white'>{rubro.nombre}</p>
+                    <p className='text-gray-700 text-xs font-bold hover:text-white'>{rubro.nombre}</p>
                 </div>
             ))
         }

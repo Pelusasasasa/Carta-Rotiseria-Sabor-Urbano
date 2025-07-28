@@ -2,10 +2,24 @@ import React from 'react'
 import Image from 'next/image'
 import { IoMdAdd } from 'react-icons/io'
 import { Producto } from '@/interface/Producto'
+import { useCarritoStore } from '@/store/useCarritoStore'
 
 
 
 const ProductoCard = ({_id, img, precio, descripcion, seccion}: Producto) => {
+
+    const { agregarProducto } = useCarritoStore();
+
+    const addProducto = () => {
+        agregarProducto({
+            _id,
+            precio,
+            descripcion,
+            cantidad: 1,
+            
+        })
+    }
+
   return (
     <div className='container mx-auto'>
         <div className='flex flex-col items-center bg-slate-700 rounded-sm py-5'>
@@ -21,7 +35,7 @@ const ProductoCard = ({_id, img, precio, descripcion, seccion}: Producto) => {
                 <p className='text-center text-yellow-400 text-xl font-bold'>${precio.toFixed(2)}</p>
             </div>
 
-            <div className='flex bg-yellow-400 w-[90%] py-1 rounded-sm hover:bg-yellow-500 mt-5 justify-center mx-10 items-center gap-5 cursor-pointer'>
+            <div onClick={addProducto} className='flex bg-yellow-400 w-[90%] py-1 rounded-sm hover:bg-yellow-500 mt-5 justify-center mx-10 items-center gap-5 cursor-pointer'>
                 <IoMdAdd color='black' size={20}/>
                 <button className='text-black'>Agregar</button>
             </div>
