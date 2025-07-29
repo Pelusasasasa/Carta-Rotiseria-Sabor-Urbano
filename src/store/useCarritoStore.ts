@@ -34,8 +34,8 @@ export const useCarritoStore = create<CarritoState>((set, get) => ({
     cliente: {nombre: '', telefono: '', direccion: ''},
     abrir: () => set({abierto: true}),
     cerrar: () => set({abierto: false}),
+
     agregarProducto: (producto) => {
-        console.log(producto)
         set((state) => {
             const existe = state.productos.find(prod => prod._id === producto._id);
 
@@ -47,17 +47,16 @@ export const useCarritoStore = create<CarritoState>((set, get) => ({
             return { productos: [...state.productos, {...producto, cantidad: 1}]}
         })
     },
+
     quitarProducto: (id) => {
         set((state) => {
             const existe = state.productos.find(prod => prod._id === id);
-            console.log(existe)
             if(existe && existe?.cantidad > 1){
                 return {
                     productos: state.productos.map((prod) => prod._id === id ? {...prod, cantidad: prod.cantidad - 1}: prod)
                 };
             };
-            console.log({...state.productos.filter(prod => prod._id !== id)})
-            return {...state.productos.filter(prod => prod._id !== id)}
+            return {productos: [...state.productos.filter(prod => prod._id !== id)]}
         })
     },
     

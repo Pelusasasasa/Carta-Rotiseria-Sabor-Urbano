@@ -4,6 +4,7 @@ import { BsPerson } from 'react-icons/bs'
 import { Input } from './Input'
 import { useForm } from '@/hooks/Useform';
 import { CiLocationOn, CiPhone } from 'react-icons/ci';
+import { useVenta } from '@/hooks/useVenta';
 
 const initialForm = {
     nombre: '',
@@ -14,7 +15,7 @@ const initialForm = {
 export const DatosCliente = () => {
 
     const {nombre, direccion, telefono, onInputChange, formState} = useForm(initialForm);
-
+    const { startActivarCliente, cliente, productos, total, startCrearVenta  } = useVenta();
     const [validForm, setValidForm] = useState<boolean>(false);
 
     useEffect(() => {
@@ -23,17 +24,18 @@ export const DatosCliente = () => {
         if(!telefono || telefono === '') return setValidForm(false);
 
         setValidForm(true);
+        startActivarCliente(formState)
     }, [formState]);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
-        console.log(formState)
+        startCrearVenta();
     }
 
   return (
-    <div className='flex flex-col items-starts'>
+    <div className='flex flex-col items-starts space-y-4'>
         <h3 className='text-yellow-400 text-xl'>Datos de entregar (Obligatorio)</h3>
-
+        <hr className='text-gray-700'/>
         <form className='w-full mt-5' onSubmit={handleSubmit}>
             <div className='mt-5'>
                 <div className='flex gap-5 items-center'>

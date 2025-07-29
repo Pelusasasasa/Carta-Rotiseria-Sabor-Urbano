@@ -12,9 +12,9 @@ interface Props {
 
 export const Input = ({type, placeholder, value, onChange, Icon, name}: Props) => {
   return (
-    <div className="my-2 flex bg-gray-600 gap-2 py-1  border-gray-400 border rounded-sm items-center px-2">
+    <div className="my-2 flex bg-gray-600 gap-2 border-gray-400 border rounded-sm items-center ">
         {Icon && <Icon size={20}/>}
-        <input name={name} type={type} className="w-full py-2" placeholder={placeholder} value={value} onChange={onChange}/>
+        <input name={name} type={type} className="w-full p-2" placeholder={placeholder} value={value} onChange={onChange}/>
     </div>
   )
 }
