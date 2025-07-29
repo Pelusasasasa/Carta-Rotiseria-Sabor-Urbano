@@ -7,7 +7,6 @@ import { useCarritoStore } from '@/store/useCarritoStore'
 
 
 const ProductoCard = ({_id, img, precio, descripcion, seccion}: Producto) => {
-
     const { agregarProducto } = useCarritoStore();
 
     const addProducto = () => {
@@ -21,21 +20,21 @@ const ProductoCard = ({_id, img, precio, descripcion, seccion}: Producto) => {
     }
 
   return (
-    <div className='container mx-auto'>
-        <div className='flex flex-col items-center bg-slate-700 rounded-sm py-5'>
+    <div className='h-[280px]'>
+        <div className='flex flex-col items-center bg-slate-700 h-full rounded-sm py-5'>
             <div className='bg-white h-20 w-20 rounded-sm'>
                 <Image src={img ?? ''} alt={descripcion}/>
             </div>
 
             <div>
-                <h2 className='font-bold mt-2 text-2xl text-center'>{descripcion}</h2>
+                <h2 className='font-bold mt-2 text-xl text-center'>{descripcion}</h2>
 
                 <p className='text-center  text-gray-400'>{seccion.nombre}</p>
 
                 <p className='text-center text-yellow-400 text-xl font-bold'>${precio.toFixed(2)}</p>
             </div>
 
-            <div onClick={addProducto} className='flex bg-yellow-400 w-[90%] py-1 rounded-sm hover:bg-yellow-500 mt-5 justify-center mx-10 items-center gap-5 cursor-pointer'>
+            <div onClick={addProducto} className='flex mt-auto bg-yellow-400 w-[90%] py-1 rounded-sm hover:bg-yellow-500 mt-5 justify-center mx-10 items-center gap-5 cursor-pointer'>
                 <IoMdAdd color='black' size={20}/>
                 <button className='text-black'>Agregar</button>
             </div>

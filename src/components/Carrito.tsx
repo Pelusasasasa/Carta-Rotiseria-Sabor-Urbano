@@ -6,7 +6,7 @@ import { useCarritoStore } from '@/store/useCarritoStore'
 
 export const Carrito = () => {
 
-    const { cerrar, total } = useCarritoStore();
+    const { cerrar, total, productos } = useCarritoStore();
 
   return (
     <div className='fixed inset-0 flex items-center justify-center bg-black/80'>
@@ -18,12 +18,22 @@ export const Carrito = () => {
             </div>
 
 
-            <div className='flex justify-between mt-2'>
-                <p className='text-xl font-bold'>Total: </p>
-                <p className='text-xl font-bold text-yellow-400'>${total().toFixed(2)}</p>
-            </div>
+            {
+                productos.length === 0 
+                ? (
+                    <p className='mt-2 text-gray-400'>El Carrito esta Vacio </p>
+                ) 
+                : (
+                    <>
+                        <div className='flex justify-between mt-2'>
+                            <p className='text-xl font-bold'>Total: </p>
+                            <p className='text-xl font-bold text-yellow-400'>${total().toFixed(2)}</p>
+                        </div>
 
-            <DatosCliente/>
+                        <DatosCliente/>
+                    </>
+                )
+            }
         </div>
     </div>
   )

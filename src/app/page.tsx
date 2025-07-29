@@ -7,22 +7,25 @@ import { Productos } from "@/components/Productos";
 import { Footer } from "@/components/Footer";
 import { Carrito } from "@/components/Carrito";
 import { useCarritoStore } from "@/store/useCarritoStore";
+import { useState } from "react";
 
 
 export default function Home() {
   const { abierto } = useCarritoStore();
+  const [value, setValue] = useState<string>('');
+
   return (
     <main className="min-h-screen min-w-screen flex flex-col" style={{backgroundColor: rotiseria.colorPrimario}}>
       <div className="pt-5 h-full w-full">
         <div className="mx-10">
           <Header/>
 
-          <Buscador />
+          <Buscador value={value} setValue={setValue} />
 
           <Rubros/>
         </div>
 
-        <Productos/>
+        <Productos value={value}/>
       </div>
 
       <Footer/>

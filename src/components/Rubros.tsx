@@ -1,25 +1,21 @@
-import React from 'react'
+import { useSecciones } from '@/hooks/useSeccion'
+import React, { useEffect } from 'react'
 
-const rubros = [
-    {
-        nombre: 'TODOS',
-    },
-    {
-        nombre: 'EMPANADAS',
-    },
-    {
-        nombre: 'PIZZAS',
-    },
-]
 
 export const Rubros = () => {
-  return (
 
+    const {secciones, startObtenerSecciones} = useSecciones();
+
+    useEffect(() => {
+        startObtenerSecciones()
+    }, []);
+
+  return (
     <div className='flex gap-5 w-full'>
         {
-            rubros.map((rubro) => (
-                <div key={rubro.nombre} className='bg-gray-400 p-1 rounded-sm hover:bg-amber-500 cursor-pointer'>
-                    <p className='text-gray-700 text-xs font-bold hover:text-white'>{rubro.nombre}</p>
+            secciones.map((seccion) => (
+                <div key={seccion.nombre} className='bg-gray-400 p-1 rounded-sm hover:bg-amber-500 cursor-pointer'>
+                    <p className='text-gray-700 text-xs font-bold hover:text-white'>{seccion.nombre}</p>
                 </div>
             ))
         }
