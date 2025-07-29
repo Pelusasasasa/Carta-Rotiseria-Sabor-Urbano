@@ -1,10 +1,12 @@
+import { Seccion } from '@/interface/Seccion';
 import { create } from 'zustand';
 
 export interface Producto {
     _id: string;
     descripcion: string;
     precio: number;
-    cantidad: number
+    cantidad: number;
+    seccion: Seccion;
 };
 
 export interface Cliente {
@@ -48,13 +50,13 @@ export const useCarritoStore = create<CarritoState>((set, get) => ({
     quitarProducto: (id) => {
         set((state) => {
             const existe = state.productos.find(prod => prod._id === id);
-
+            console.log(existe)
             if(existe && existe?.cantidad > 1){
                 return {
                     productos: state.productos.map((prod) => prod._id === id ? {...prod, cantidad: prod.cantidad - 1}: prod)
                 };
             };
-
+            console.log({...state.productos.filter(prod => prod._id !== id)})
             return {...state.productos.filter(prod => prod._id !== id)}
         })
     },

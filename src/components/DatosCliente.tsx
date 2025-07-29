@@ -25,14 +25,14 @@ export const DatosCliente = () => {
         setValidForm(true);
     }, [formState]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault(); 
         console.log(formState)
     }
 
   return (
-    <div className='flex flex-col items-start mt-5'>
-        <h3 className='text-yellow-400'>Datos de entregar (Obligatorio)</h3>
+    <div className='flex flex-col items-starts'>
+        <h3 className='text-yellow-400 text-xl'>Datos de entregar (Obligatorio)</h3>
 
         <form className='w-full mt-5' onSubmit={handleSubmit}>
             <div className='mt-5'>
@@ -63,7 +63,7 @@ export const DatosCliente = () => {
             </div>
             
             <div className='mt-5'>
-                <button className={`py-2 px-2 border border-gray-500 rounded-sm font-bold cursor-pointer w-full ${validForm ? 'bg-yellow-400 text-black hover:bg-yellow-500' : 'bg-gray-500 text-gray-400'}`}>{validForm ? 'Confirmar Pedido' : 'Complete todos los datos para continuar'}</button>
+                <button className={`py-2 px-2 border border-gray-500 rounded-sm font-bold cursor-pointer w-full ${validForm ? 'bg-yellow-400 text-black hover:bg-yellow-500' : 'bg-gray-700 text-gray-500'}`}>{validForm ? 'Confirmar Pedido' : 'Complete todos los datos para continuar'}</button>
             </div>
         </form>
 

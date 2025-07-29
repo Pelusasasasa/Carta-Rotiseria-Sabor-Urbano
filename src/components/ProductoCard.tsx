@@ -15,6 +15,7 @@ const ProductoCard = ({_id, img, precio, descripcion, seccion}: Producto) => {
             precio,
             descripcion,
             cantidad: 1,
+            seccion: seccion
             
         })
     }
@@ -34,7 +35,7 @@ const ProductoCard = ({_id, img, precio, descripcion, seccion}: Producto) => {
                 <p className='text-center text-yellow-400 text-xl font-bold'>${precio.toFixed(2)}</p>
             </div>
 
-            <div onClick={addProducto} className='flex mt-auto bg-yellow-400 w-[90%] py-1 rounded-sm hover:bg-yellow-500 mt-5 justify-center mx-10 items-center gap-5 cursor-pointer'>
+            <div onClick={addProducto} className='flex mt-auto bg-yellow-400 w-[90%] py-1 rounded-sm hover:bg-yellow-500 justify-center mx-10 items-center gap-5 cursor-pointer'>
                 <IoMdAdd color='black' size={20}/>
                 <button className='text-black'>Agregar</button>
             </div>

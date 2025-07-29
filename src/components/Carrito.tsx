@@ -3,38 +3,29 @@ import { CgClose } from 'react-icons/cg'
 import rotiseria from '../../rotiseria.config'
 import { DatosCliente } from './DatosCliente'
 import { useCarritoStore } from '@/store/useCarritoStore'
+import ResumenPedido from './ResumenPedido'
 
 export const Carrito = () => {
 
-    const { cerrar, total, productos } = useCarritoStore();
+    const { cerrar} = useCarritoStore();
 
   return (
     <div className='fixed inset-0 flex items-center justify-center bg-black/80'>
-        <div className={` p-6 rounded shadow-md text-center w-xl `} style={{backgroundColor: rotiseria.colorPrimario}}>
-            
-            <div className='flex  justify-between'>
-                <h2 className='text-yellow-400 text-xl'>Carrito de Compras</h2>
-                <CgClose size={20} className='text-gray-500 hover:text-white hover:cursor-pointer' onClick={cerrar}/>
+
+      <div style={{backgroundColor: rotiseria.colorPrimario}} className='border border-gray-500 text-center'>
+            <div className='flex justify-center relative items-center my-5'>
+              <h3 className='text-yellow-400 text-xl'>Finalizar Pedido</h3>
+              <button className='absolute right-0 mx-2 hover:cursor-pointer'>
+                <CgClose className='hover:text-white text-gray-500' onClick={cerrar} size={25}/>
+              </button>
             </div>
+          
+          <div className={` w-3xl p-5 rounded-sm grid grid-cols-1 md:grid-cols-2  gap-6 `}>    
+              <DatosCliente/>
 
-
-            {
-                productos.length === 0 
-                ? (
-                    <p className='mt-2 text-gray-400'>El Carrito esta Vacio </p>
-                ) 
-                : (
-                    <>
-                        <div className='flex justify-between mt-2'>
-                            <p className='text-xl font-bold'>Total: </p>
-                            <p className='text-xl font-bold text-yellow-400'>${total().toFixed(2)}</p>
-                        </div>
-
-                        <DatosCliente/>
-                    </>
-                )
-            }
-        </div>
+              <ResumenPedido/>
+          </div>
+      </div>
     </div>
   )
 }
