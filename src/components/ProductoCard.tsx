@@ -4,7 +4,7 @@ import { IoMdAdd } from 'react-icons/io'
 import { Producto } from '@/interface/Producto'
 import { useCarritoStore } from '@/store/useCarritoStore'
 
-
+const ip = 'http://localhost:3000/rotiseria/img'
 
 const ProductoCard = ({_id, img, precio, descripcion, seccion}: Producto) => {
     const { agregarProducto } = useCarritoStore();
@@ -23,7 +23,7 @@ const ProductoCard = ({_id, img, precio, descripcion, seccion}: Producto) => {
     <div className='h-[280px]'>
         <div className='flex flex-col items-center bg-slate-700 h-full rounded-sm py-5'>
             <div className='bg-white h-20 w-20 rounded-sm'>
-                <Image src={img ?? ''} alt={descripcion}/>
+                {/* <Image src={`${ip}/${_id}.png`} alt={descripcion} width={20} height={20}/> */}
             </div>
 
             <div>
