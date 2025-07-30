@@ -9,9 +9,9 @@ export const useProductos = () => {
     const startObtenerProductos = async() => {
         try {
             const { data } = await axios.get(`/api/productos`);
-
             if(data.ok){
-                cargarProductos(data.productos)
+                cargarProductos(data.productos);
+                return data.ok;
             }
         } catch (error) {
             console.log(error);

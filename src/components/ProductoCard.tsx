@@ -21,14 +21,14 @@ const ProductoCard = ({_id, img, precio, descripcion, seccion}: Producto) => {
     }
 
   return (
-    <div className='h-[280px]'>
+    <div className='h-[250px]'>
         <div className='flex flex-col items-center bg-slate-700 h-full rounded-sm py-5'>
             <div className='bg-white h-20 w-20 rounded-sm'>
                 {/* <Image src={`${ip}/${_id}.png`} alt={descripcion} width={20} height={20}/> */}
             </div>
 
             <div>
-                <h2 className='font-bold mt-2 text-xl text-center'>{descripcion}</h2>
+                <h2 className='font-bold mt-2 text-md text-center'>{descripcion}</h2>
 
                 <p className='text-center  text-gray-400'>{seccion.nombre}</p>
 

@@ -1,9 +1,8 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = 'mongodb://localhost:27017/Rotiseria';
+const MONGODB_URI = 'mongodb+srv://agustinlorenzatto:Pelusa3345@pelusadev-cluster-chico.afmscn8.mongodb.net/Carta-Sabor-Urbano';
 
 export const dbConnect = async() => {
-    console.log("AAAAAA");
     try {
         await mongoose.connect(MONGODB_URI);
         console.log("✅ Se conecto a la base de datos de Rotiseria")

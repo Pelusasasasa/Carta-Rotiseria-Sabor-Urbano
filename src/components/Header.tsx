@@ -4,6 +4,7 @@ import React from 'react'
 import rotiseria from '../../rotiseria.config'
 import { MdOutlineShoppingCart } from 'react-icons/md'
 import { useCarritoStore } from '@/store/useCarritoStore'
+import { totalProductos } from '../../helpers/totalProductos'
 
 export const Header = () => {
 
@@ -18,7 +19,7 @@ return (
             </div>
 
             <div className='cursor-pointer hover:bg-white/20 p-2 hover:rounded-full' onClick={abrir}>
-                <p className='ml-5 p-1 text-black text-center bg-yellow-400 rounded-full'>{productos.length}</p>
+                <p className='ml-5 p-1 text-black text-center bg-yellow-400 rounded-full'>{totalProductos(productos)}</p>
                 <MdOutlineShoppingCart size={20} className='text-yellow-400'/>
                 
             </div>

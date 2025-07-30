@@ -3,7 +3,7 @@ import { Cliente, useCarritoStore } from "@/store/useCarritoStore"
 import axios from "axios";
 
 export const useVenta = () => {
-    const { cliente, productos, total, setCliente } = useCarritoStore();
+    const { cliente, productos, total, setCliente, cerrar, vaciarCarrito, envio, tipo_pago, setEnvio, setTipoPago } = useCarritoStore();
 
     const startActivarCliente = (cliente: Cliente) => {
         setCliente(cliente)
@@ -16,6 +16,7 @@ export const useVenta = () => {
                 cliente: cliente.nombre,
                 idCliente: '1',
                 listaProductos: productos,
+                observaciones: cliente.observaciones || '',
                 precio: total(),
                 descuento: 0,
                 tipo_venta: 'Comprobante',
@@ -23,12 +24,16 @@ export const useVenta = () => {
                 direccion: cliente.direccion,
                 telefono: cliente.telefono,
                 pasado: false,
+                envio,
+                tipo_pago
             };
-
+            console.log(venta.observaciones);
             const { data } = await axios.post('/api/ventas', venta);
 
             if(data.ok){
-                console.log(data)
+                setCliente({} as Cliente);
+                vaciarCarrito();
+                return data.ok;
             }
         } catch (error) {
             console.log(error);
@@ -41,6 +46,7 @@ export const useVenta = () => {
     return {
         //Atributos
         cliente,
+        cerrar,
         productos,
         total,
 

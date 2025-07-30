@@ -5,6 +5,8 @@ import { Input } from './Input'
 import { useForm } from '@/hooks/Useform';
 import { CiLocationOn, CiPhone } from 'react-icons/ci';
 import { useVenta } from '@/hooks/useVenta';
+import Swal from 'sweetalert2';
+import { FiMessageSquare } from 'react-icons/fi';
 
 const initialForm = {
     nombre: '',
@@ -14,8 +16,8 @@ const initialForm = {
 
 export const DatosCliente = () => {
 
-    const {nombre, direccion, telefono, onInputChange, formState} = useForm(initialForm);
-    const { startActivarCliente, cliente, productos, total, startCrearVenta  } = useVenta();
+    const {nombre, direccion, telefono, observaciones, onInputChange, formState} = useForm(initialForm);
+    const { startActivarCliente, startCrearVenta, cerrar  } = useVenta();
     const [validForm, setValidForm] = useState<boolean>(false);
 
     useEffect(() => {
@@ -27,9 +29,24 @@ export const DatosCliente = () => {
         startActivarCliente(formState)
     }, [formState]);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
-        startCrearVenta();
+        const ok = await startCrearVenta();
+
+        if(ok){
+            const { isConfirmed } = await Swal.fire({
+                title: 'Pedido Cargado con exito',
+                text: 'Enviar Confirmacion por WhatsApp Por Favor',
+                icon: 'success',
+                confirmButtonText: 'Enviar'
+            });
+
+            if(isConfirmed){
+                cerrar()
+            }
+        }else{
+
+        }
     }
 
   return (
@@ -62,6 +79,15 @@ export const DatosCliente = () => {
                 </div>
 
                 <Input type='text' placeholder='Ingrese su direccion' name='telefono' value={telefono} onChange={onInputChange}/>
+            </div>
+
+            <div className='mt-2'>
+                <div className='flex gap-5 items-center'>
+                    <FiMessageSquare />
+                    <label htmlFor="observaciones">Observaciones (Opcional)</label>
+                </div>
+
+                <textarea name="observaciones" id="observaciones" value={observaciones} onChange={onInputChange} className='my-2 flex bg-gray-600 w-full gap-2 border-gray-400 border rounded-sm items-center px-2'></textarea>
             </div>
             
             <div className='mt-5'>

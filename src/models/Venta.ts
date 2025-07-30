@@ -21,6 +21,10 @@ const VentaSchema = new Schema({
         type: String,
         required: true
     },
+    observaciones: {
+        type: String,
+        default: ''
+    },
     listaProductos: {
         type: [],
         required: true
@@ -44,6 +48,14 @@ const VentaSchema = new Schema({
     dispositivo: {
         type: String,
         default: 'WEB'
+    },
+    envio: {
+        type: Boolean,
+        default: false
+    },
+    tipo_pago: {
+        type: String,
+        default: 'EFECTIVO'
     },
     pasado: {
         type: String,
