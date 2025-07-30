@@ -11,13 +11,20 @@ export interface Producto {
 
 interface ProductoState {
     productos: Producto[];
+    loading: boolean;
     cargarProductos: (nuevos: Producto[]) => void;
     limpiarProductos: () => void;
+    setLoading: () => void;
 };
 
 
 export const useProductoStore = create<ProductoState>((set) => ({
     productos: [],
-    cargarProductos: (nuevos) => set({ productos: nuevos }),
+    loading: false,
+    setLoading: () => set({ loading: true}),
+    cargarProductos: (nuevos) => set({ 
+        productos: nuevos,
+        loading: false
+     }),
     limpiarProductos: () => set({ productos: [] })
 }))

@@ -4,10 +4,11 @@ import axios from "axios";
 
 export const useProductos = () => {
 
-    const { productos, cargarProductos } = useProductoStore();
+    const { productos, cargarProductos, loading, setLoading } = useProductoStore();
 
     const startObtenerProductos = async() => {
         try {
+            setLoading();
             const { data } = await axios.get(`/api/productos`);
             if(data.ok){
                 cargarProductos(data.productos);
@@ -17,12 +18,13 @@ export const useProductos = () => {
             console.log(error);
             
         }
-    }
+    };
+
 
     return {
         //Atributos
+        loading,
         productos,
-
 
         //Metodos
         startObtenerProductos

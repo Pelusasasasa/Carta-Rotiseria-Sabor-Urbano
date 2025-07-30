@@ -10,12 +10,12 @@ interface Props {
 
 export const Productos = ({ value }: Props) => {
 
-  const { startObtenerProductos, productos } = useProductos();
+  const { startObtenerProductos, productos, loading } = useProductos();
   const { seccionActive } = useSecciones();
   const [productosFiltrados, setProductosFiltrados] = useState<Producto[]>(productos);
 
   useEffect(() => {
-    startObtenerProductos()
+    startObtenerProductos();
   }, []);
 
   useEffect(() => {
@@ -38,6 +38,14 @@ export const Productos = ({ value }: Props) => {
       setProductosFiltrados(productos);
     }
   }, [seccionActive])
+
+  if(loading){
+    return (
+      <div className='flex justify-center h-[60vh] bg-slate-800 items-center'>
+        <div className='w-12 h-12 border-4 border-t-transparent border-yellow-400 rounded-full animate-spin'></div>
+      </div>
+    )
+  }
 
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-15 my-5 bg-slate-800 h-[60vh] px-5 overflow-y-scroll py-4'>

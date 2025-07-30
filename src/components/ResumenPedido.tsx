@@ -23,15 +23,25 @@ const ResumenPedido = () => {
 
         <div>
             <div className='flex justify-between my-2'>
-                <p className='text-sm'>Cantidad de Productos: </p>
-                <p>{productos.length} Items</p>
+                <p className='text-sm text-white'>Cantidad de Productos: </p>
+                <p className='text-white'>{productos.length} Items</p>
             </div>
 
             <hr className='text-gray-700 '/>
 
             <div className='flex justify-between my-2'>
-                <p className='text-md'>Subtotal: </p>
+                <p className='text-md text-white'>Subtotal: </p>
                 <p className='text-yellow-400 font-bold text-xl'>${total().toFixed(2)}</p>
+            </div>
+
+            <div className='flex justify-between my-2'>
+                <p className='text-lg text-white font-bold'>Total: </p>
+                <p className='text-yellow-400 font-bold text-xl'>${total().toFixed(2)}</p>
+            </div>
+
+
+            <div>
+                <p className='text-white'>*El envio puede tener cargos extras</p>
             </div>
         </div>
 

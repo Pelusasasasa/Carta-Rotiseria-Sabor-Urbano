@@ -24,22 +24,22 @@ export const ProductoItemCarrito = ({_id, cantidad, descripcion, precio, seccion
         </div>
 
         <div className='flex flex-col w-[230px]'>
-            <h3 className='text-sm'>{descripcion}</h3>
-            <p className='text-xs text-gray-400'>{seccion.nombre}</p>
-            <p className='text-md text-yellow-400 font-bold'>${precio}</p>
+            <h3 className='text-sm text-white text-start'>{descripcion}</h3>
+            <p className='text-xs text-gray-400 text-start'>{seccion.nombre}</p>
+            <p className='text-md text-yellow-400 font-bold text-start'>${precio}</p>
         </div>
 
         <div className='ml-auto'>
-            <div className='flex gap-1'>
-                <button onClick={restarProducto} className='border rounded-sm h-7 text-xl w-7 flex items-center justify-center cursor-pointer border-gray-500 bg-white text-yellow-600 p-1 hover:bg-yellow-500 hover:text-black'>-</button>
-                <p>{cantidad}</p>
+            <div className='flex gap-3'>
+                <button onClick={restarProducto} className='border active:bg-slate-300 rounded-sm h-7 text-xl w-7 flex items-center justify-center cursor-pointer border-gray-500 bg-white text-yellow-600 p-1 hover:bg-yellow-500 hover:text-black'>-</button>
+                <p className='text-white'>{cantidad}</p>
                 <button onClick={sumarProducto}
-                className='border rounded-sm h-7 text-xl w-7 flex items-center justify-center cursor-pointer  border-gray-500 bg-white text-yellow-600 p-1 hover:bg-yellow-500 hover:text-black'>
+                className='border rounded-sm h-7 text-xl w-7 active:bg-slate-300 flex items-center justify-center cursor-pointer  border-gray-500 bg-white text-yellow-600 p-1 hover:bg-yellow-500 hover:text-black'>
                 +</button>
             </div>
 
             <div>
-                <p>${precio.toFixed(2)}</p>
+                <p className='text-white'>${(precio * cantidad).toFixed(2)}</p>
             </div>
         </div>
     </div>

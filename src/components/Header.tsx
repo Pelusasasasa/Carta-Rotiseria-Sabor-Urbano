@@ -4,7 +4,7 @@ import React from 'react'
 import rotiseria from '../../rotiseria.config'
 import { MdOutlineShoppingCart } from 'react-icons/md'
 import { useCarritoStore } from '@/store/useCarritoStore'
-import { totalProductos } from '../../helpers/totalProductos'
+import { totalProductos } from '../helpers/totalProductos'
 
 export const Header = () => {
 

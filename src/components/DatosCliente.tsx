@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { BsPerson } from 'react-icons/bs'
 import { Input } from './Input'
 import { useForm } from '@/hooks/Useform';
@@ -7,18 +7,25 @@ import { CiLocationOn, CiPhone } from 'react-icons/ci';
 import { useVenta } from '@/hooks/useVenta';
 import Swal from 'sweetalert2';
 import { FiMessageSquare } from 'react-icons/fi';
+import { LuCreditCard, LuTruck } from 'react-icons/lu';
+import { enviarMensajeWhatsApp } from '@/helpers/enviarMensajeWhatsApp';
 
 const initialForm = {
     nombre: '',
     direccion: '',
     telefono: '',
+    tipo_pago: 'EFECTIVO',
+    envio: "false"
 }
 
 export const DatosCliente = () => {
 
-    const {nombre, direccion, telefono, observaciones, onInputChange, formState} = useForm(initialForm);
+    const {nombre, direccion, telefono, tipo_pago, envio, observaciones, onInputChange, formState} = useForm(initialForm);
     const { startActivarCliente, startCrearVenta, cerrar  } = useVenta();
     const [validForm, setValidForm] = useState<boolean>(false);
+
+    const direccionRef = useRef<HTMLInputElement>(null);
+    const telefonoRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         if(!nombre || nombre === '') return setValidForm(false);
@@ -29,9 +36,19 @@ export const DatosCliente = () => {
         startActivarCliente(formState)
     }, [formState]);
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, siguiente: React.RefObject<HTMLInputElement> | null) => {
+        if(e.key === 'Enter'){
+            e.preventDefault();
+            
+            if(siguiente?.current){
+                siguiente.current?.focus();
+            }
+        }
+    }
+
     const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
-        const ok = await startCrearVenta();
+        const {ok, venta, error} = await startCrearVenta();
 
         if(ok){
             const { isConfirmed } = await Swal.fire({
@@ -42,56 +59,89 @@ export const DatosCliente = () => {
             });
 
             if(isConfirmed){
-                cerrar()
+                enviarMensajeWhatsApp(venta)
+                cerrar();
             }
         }else{
-
+            await Swal.fire('No se pudo generar el pedido', error.response?.data?.error, 'error');
         }
-    }
+    };
 
   return (
     <div className='flex flex-col items-starts space-y-4'>
-        <h3 className='text-yellow-400 text-xl'>Datos de entregar (Obligatorio)</h3>
+        <h3 className='text-yellow-400 text-lg text-start'>Datos de entregar (Obligatorio)</h3>
         <hr className='text-gray-700'/>
-        <form className='w-full mt-5' onSubmit={handleSubmit}>
-            <div className='mt-5'>
+        <form className='w-full' onSubmit={handleSubmit}>
+
+            <div className='mt-3'>
                 <div className='flex gap-5 items-center'>
-                    <BsPerson/>
-                    <label htmlFor="">Nombre *</label>
+                    <BsPerson className='text-white'/>
+                    <label className='text-white' htmlFor="">Nombre *</label>
                 </div>
 
-                <Input type='text' placeholder='Ingrese su nombre' name='nombre' value={nombre} onChange={onInputChange}/>
+                <Input type='text' placeholder='Ingrese su nombre' name='nombre' value={nombre} onChange={onInputChange} onKeyDown={((e) => handleKeyDown(e, direccionRef as React.RefObject<HTMLInputElement>))}/>
             </div>
 
-            <div className='mt-5'>
+            <div className='mt-3'>
                 <div className='flex gap-5 items-center'>
-                    <CiLocationOn />
-                    <label htmlFor="direccion">Direccion *</label>
+                    <CiLocationOn  className='text-white' />
+                    <label className='text-white' htmlFor="direccion">Direccion *</label>
                 </div>
 
-                <Input type='text' placeholder='Ingrese su direccion' name='direccion' value={direccion} onChange={onInputChange}/>
+                <Input type='text' placeholder='Ingrese su direccion' ref={direccionRef as React.RefObject<HTMLInputElement>} name='direccion' value={direccion} onChange={onInputChange} onKeyDown={((e) => handleKeyDown(e, telefonoRef as React.RefObject<HTMLInputElement>))}/>
             </div>
 
-            <div className='mt-5'>
-                <div className='flex gap-5 items-center'>
-                    <CiPhone />
-                    <label htmlFor="telefono">Telefono *</label>
+            <div className='mt-3'>
+                <div className='flex gap-2 items-center'>
+                    <CiPhone className='text-white'/>
+                    <label className='text-white' htmlFor="telefono">Telefono *</label>
                 </div>
 
-                <Input type='text' placeholder='Ingrese su direccion' name='telefono' value={telefono} onChange={onInputChange}/>
+                <Input type='text' placeholder='Ingrese su Telefono' ref={telefonoRef as React.RefObject<HTMLInputElement>} name='telefono' value={telefono} onChange={onInputChange} onKeyDown={((e) => handleKeyDown(e, null))}/>
             </div>
 
-            <div className='mt-2'>
-                <div className='flex gap-5 items-center'>
-                    <FiMessageSquare />
-                    <label htmlFor="observaciones">Observaciones (Opcional)</label>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+
+                <div>
+                    <div className='flex gap-5 items-center'>
+                        <LuCreditCard className='text-white' />
+                        <label className='text-white' htmlFor="tipo_pago">Tipo de Pago *</label>
+                    </div>
+                    <select className='bg-slate-700 text-white p-2 rounded-lg border border-gray-500 w-full ' name="tipo_pago" id="tipo_pago" value={tipo_pago} onChange={onInputChange}>
+                        <option value="EFECTIVO">Efectivo</option>
+                        <option value="TRANSFERENCIA">Transferencia</option>
+                    </select>
                 </div>
 
-                <textarea name="observaciones" id="observaciones" value={observaciones} onChange={onInputChange} className='my-2 flex bg-gray-600 w-full gap-2 border-gray-400 border rounded-sm items-center px-2'></textarea>
+                <div>
+                    <div className='flex gap-5 items-center'>
+                        <LuTruck className='text-white' />
+                        <label className='text-white' htmlFor="envio">Modalidad *</label>
+                    </div>
+                    <select className='bg-slate-700 text-white p-2 rounded-lg border border-gray-500 w-full' name="envio" id="envio" value={envio} onChange={onInputChange}>
+                        <option value='true'>Envio a domicilio</option>
+                        <option value='false'>Retiro en el Local</option>
+                    </select>
+                </div>
+
             </div>
+
+            <div className='mt-3'>
+                <div className='flex gap-5 items-center'>
+                    <FiMessageSquare className='text-white'/>
+                    <label className='text-white' htmlFor="observaciones">Observaciones (Opcional)</label>
+                </div>
+
+                <textarea name="observaciones" id="observaciones" placeholder='Ej. Sin Cebolla, Tocar Timbre, Dpto. A, etc.' value={observaciones} onChange={onInputChange} className='my-2 text-white placeholder:text-slate-400 flex bg-slate-700 w-full gap-2 border-gray-400 border rounded-sm items-center px-2'>
+                    
+                </textarea>
+            </div>
+
+
+            <hr className='text-slate-700 mt-3'/>
             
             <div className='mt-5'>
-                <button className={`py-2 px-2 border border-gray-500 rounded-sm font-bold cursor-pointer w-full ${validForm ? 'bg-yellow-400 text-black hover:bg-yellow-500' : 'bg-gray-700 text-gray-500'}`}>{validForm ? 'Confirmar Pedido' : 'Complete todos los datos para continuar'}</button>
+                <button type='submit' className={`py-2 px-2 border border-gray-500 rounded-sm font-bold cursor-pointer w-full ${validForm ? 'bg-yellow-400 text-black hover:bg-yellow-500' : 'bg-gray-700 text-gray-500'}`}>{validForm ? 'Confirmar Pedido' : 'Complete todos los datos para continuar'}</button>
             </div>
         </form>
 
