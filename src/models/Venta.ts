@@ -63,5 +63,4 @@ const VentaSchema = new Schema({
     }
 });
 
-
 export const Venta = models.Venta || model('Venta', VentaSchema)
