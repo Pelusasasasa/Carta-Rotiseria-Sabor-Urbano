@@ -58,7 +58,7 @@ const VentaSchema = new Schema({
         default: 'EFECTIVO'
     },
     pasado: {
-        type: String,
+        type: Boolean,
         default: false
     }
 });
