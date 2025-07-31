@@ -5,8 +5,12 @@ export interface Producto {
     _id: string;
     descripcion: string;
     precio: number;
-    cantidad: number;
     seccion: Seccion;
+};
+
+export interface ListaProductos {
+   cantidad: number;
+   producto: Producto;
 };
 
 export interface Cliente {
@@ -21,11 +25,11 @@ export interface Cliente {
 
 interface CarritoState {
     abierto: boolean;
-    productos: Producto[];
+    productos: ListaProductos[];
     cliente:Cliente;
     abrir: () => void;
     cerrar: () => void;
-    agregarProducto: (producto: Producto) => void;
+    agregarProducto: (producto: ListaProductos) => void;
     quitarProducto: (id: string) => void;
     vaciarCarrito: () => void;
     setCliente: (cliente: Cliente) => void;
@@ -43,11 +47,11 @@ export const useCarritoStore = create<CarritoState>((set, get) => ({
 
     agregarProducto: (producto) => {
         set((state) => {
-            const existe = state.productos.find(prod => prod._id === producto._id);
+            const existe = state.productos.find(prod => prod.producto._id === producto.producto._id);
 
             if (existe){
                 return {
-                    productos: state.productos.map((prod) => prod._id === producto._id ? {...prod, cantidad: prod.cantidad + producto.cantidad} : prod),
+                    productos: state.productos.map((prod) => prod.producto._id === producto.producto._id ? {...prod, cantidad: prod.cantidad + producto.cantidad} : prod),
                 };
             };
             return { productos: [...state.productos, {...producto, cantidad: 1}]}
@@ -56,13 +60,13 @@ export const useCarritoStore = create<CarritoState>((set, get) => ({
 
     quitarProducto: (id) => {
         set((state) => {
-            const existe = state.productos.find(prod => prod._id === id);
+            const existe = state.productos.find(prod => prod.producto._id === id);
             if(existe && existe?.cantidad > 1){
                 return {
-                    productos: state.productos.map((prod) => prod._id === id ? {...prod, cantidad: prod.cantidad - 1}: prod)
+                    productos: state.productos.map((prod) => prod.producto._id === id ? {...prod, cantidad: prod.cantidad - 1}: prod)
                 };
             };
-            return {productos: [...state.productos.filter(prod => prod._id !== id)]}
+            return {productos: [...state.productos.filter(prod => prod.producto._id !== id)]}
         })
     },
     
@@ -72,7 +76,7 @@ export const useCarritoStore = create<CarritoState>((set, get) => ({
     setCliente: (cliente) => set({cliente}),
     total: () => {
         const sum = get().productos.reduce(
-             (acc, prod) => acc + prod.precio * prod.cantidad,
+             (acc, prod) => acc + prod.producto.precio * prod.cantidad,
             0
         );
         

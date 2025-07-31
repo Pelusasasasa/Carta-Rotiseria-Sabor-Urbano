@@ -1,10 +1,10 @@
-import { Producto, useCarritoStore } from '@/store/useCarritoStore'
+import { ListaProductos,  useCarritoStore } from '@/store/useCarritoStore'
 import Image from 'next/image'
 import React from 'react'
 
 
 
-export const ProductoItemCarrito = ({_id, cantidad, descripcion, precio, seccion}: Producto) => {
+export const ProductoItemCarrito = ({cantidad, producto:{_id, descripcion, seccion, precio}}: ListaProductos) => {
 
     const { agregarProducto, quitarProducto } = useCarritoStore()
 
@@ -13,7 +13,7 @@ export const ProductoItemCarrito = ({_id, cantidad, descripcion, precio, seccion
     };
 
     const sumarProducto = () => {
-        agregarProducto({_id, cantidad: 1, descripcion, precio, seccion})
+        agregarProducto({cantidad: 1, producto: {_id, descripcion, precio, seccion}})
     };
 
   return (
@@ -25,7 +25,7 @@ export const ProductoItemCarrito = ({_id, cantidad, descripcion, precio, seccion
 
         <div className='flex flex-col w-[230px]'>
             <h3 className='text-sm text-white text-start'>{descripcion}</h3>
-            <p className='text-xs text-gray-400 text-start'>{seccion.nombre}</p>
+            <p className='text-xs text-gray-400 text-start'>{seccion?.nombre}</p>
             <p className='text-md text-yellow-400 font-bold text-start'>${precio}</p>
         </div>
 

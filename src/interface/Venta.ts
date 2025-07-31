@@ -8,6 +8,7 @@ export interface Venta {
     precio: number;
     descuento: number;
     tipo_venta: string;
+    tipo_comp: string;
     dispositivo: string;
     direccion: string;
     telefono: string;

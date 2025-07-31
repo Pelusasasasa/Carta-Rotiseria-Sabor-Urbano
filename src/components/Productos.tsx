@@ -33,7 +33,7 @@ export const Productos = ({ value }: Props) => {
 
   useEffect(() => {
     if(seccionActive?.nombre !== 'TODOS'){
-      setProductosFiltrados(productos.filter(producto => producto.seccion._id === seccionActive?._id))
+      setProductosFiltrados(productos.filter(producto => producto?.seccion?._id === seccionActive?._id))
     }else{
       setProductosFiltrados(productos);
     }
@@ -45,7 +45,7 @@ export const Productos = ({ value }: Props) => {
         <div className='w-12 h-12 border-4 border-t-transparent border-yellow-400 rounded-full animate-spin'></div>
       </div>
     )
-  }
+  };
 
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-15 my-5 bg-slate-800 h-[60vh] px-5 overflow-y-scroll py-4'>

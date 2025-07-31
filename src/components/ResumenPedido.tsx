@@ -14,7 +14,7 @@ const ResumenPedido = () => {
         <div className='overflow-y-auto max-h-[350px]'>
             {
                 productos.map(producto => (
-                    <ProductoItemCarrito {...producto} key={producto._id}/>
+                    <ProductoItemCarrito {...producto} key={producto.producto._id}/>
                 ))
             }
         </div>

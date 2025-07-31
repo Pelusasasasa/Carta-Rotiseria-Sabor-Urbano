@@ -1,24 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 import { IoMdAdd } from 'react-icons/io'
 import { Producto } from '@/interface/Producto'
 import { useCarritoStore } from '@/store/useCarritoStore'
-
-const ip = 'http://localhost:3000/rotiseria/img'
 
 const ProductoCard = ({_id, img, precio, descripcion, seccion}: Producto) => {
     const { agregarProducto } = useCarritoStore();
 
     const addProducto = () => {
         agregarProducto({
-            _id,
-            precio,
-            descripcion,
             cantidad: 1,
-            seccion: seccion
-            
+            producto: {_id, precio, descripcion, seccion: seccion }
         })
-    }
+    };
 
   return (
     <div className='h-[235px]'>
@@ -30,7 +24,7 @@ const ProductoCard = ({_id, img, precio, descripcion, seccion}: Producto) => {
             <div>
                 <h2 className='font-bold mt-2 text-md text-center text-white'>{descripcion}</h2>
 
-                <p className='text-center  text-gray-400'>{seccion.nombre}</p>
+                <p className='text-center  text-gray-400'>{seccion?.nombre}</p>
 
                 <p className='text-center text-yellow-400 text-xl font-bold'>${precio.toFixed(2)}</p>
             </div>

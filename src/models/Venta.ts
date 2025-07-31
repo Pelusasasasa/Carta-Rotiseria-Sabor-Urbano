@@ -43,7 +43,7 @@ const VentaSchema = new Schema({
     },
     tipo_comp: {
         type: String,
-        default: ''
+        default: 'Comprobante'
     },
     dispositivo: {
         type: String,

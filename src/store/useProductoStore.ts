@@ -4,7 +4,7 @@ import { create } from "zustand";
 export interface Producto {
     _id: string;
     descripcion: string;
-    precio: string;
+    precio: number;
     img: string;
     seccion: Seccion;
 };
