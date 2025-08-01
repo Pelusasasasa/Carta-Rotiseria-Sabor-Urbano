@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import { Carrito } from "@/components/Carrito";
 import { useCarritoStore } from "@/store/useCarritoStore";
 import { useState } from "react";
+import { Analytics } from "@vercel/analytics/next"
 
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen min-w-screen flex flex-col" style={{backgroundColor: rotiseria.colorPrimario}}>
+      <Analytics/>
       <div className="pt-5 h-full w-full">
         <div className="mx-10">
           <Header/>
