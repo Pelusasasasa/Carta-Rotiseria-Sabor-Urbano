@@ -1,14 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-export interface UseFormReturn<T> {
-    formState: T;
-    onInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
-    onResetForm: () => void;
-    isFormValid: boolean;
-    [key: string]: any; // para incluir validaciones adicionales dinámicas
-};
-
-export const useForm = <T extends Object>(initialForm: T, formValidations: { [K in keyof T]?: [(value: T[K]) => boolean, string] }  = {}): UseFormReturn<T> => {
+export const useForm = (initialForm, formValidations) => {
 
     const [formState, setFormState] = useState(initialForm);
     const [formValidation, setFormValidation] = useState({});

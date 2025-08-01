@@ -1,8 +1,8 @@
-import { Producto } from "./Producto";
+import { ListaProductos } from "@/store/useCarritoStore";
 
 export interface Venta {
     cliente: string;
-    listaProductos: Producto[];
+    listaProductos: ListaProductos[];
     observaciones: string;
     idCliente: string;
     precio: number;
