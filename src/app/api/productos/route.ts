@@ -7,7 +7,7 @@ export async function GET(){
     try {
         await dbConnect();
         const productos = await Producto.find()
-            .select('descripcion precio seccion')
+            .select('descripcion precio seccion imgCloudinaryPath')
             .populate('seccion', 'nombre')
             .lean();
         return NextResponse.json({

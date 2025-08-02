@@ -9,12 +9,13 @@ const ProductoSchema = new Schema({
         type: Number,
         required: true,
     },
-    img: {
-        type: String,
-    },
     seccion: {
         type: Types.ObjectId,
         ref: 'Seccion'
+    },
+    imgCloudinaryPath: {
+        type: String,
+        default: ''
     }
 });
 

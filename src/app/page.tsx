@@ -7,13 +7,29 @@ import { Productos } from "@/components/Productos";
 import { Footer } from "@/components/Footer";
 import { Carrito } from "@/components/Carrito";
 import { useCarritoStore } from "@/store/useCarritoStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Analytics } from "@vercel/analytics/next"
+import { useVariable } from "@/hooks/useVariable";
+import { ModalPaginaCerrada } from "@/components/ModalPaginaCerrada";
 
 
 export default function Home() {
   const { abierto } = useCarritoStore();
   const [value, setValue] = useState<string>('');
+  const {variable, startGetVariable } = useVariable();
+
+  useEffect(() => {
+    startGetVariable();
+  }, []);
+
+  useEffect(() => {
+    console.log(variable);
+  }, [variable]);
+
+  if(!variable?.paginaWebAbierto){
+    return <ModalPaginaCerrada/>
+      
+  }
 
   return (
     <main className="min-h-screen min-w-screen flex flex-col" style={{backgroundColor: rotiseria.colorPrimario}}>

@@ -18,7 +18,7 @@ export const enviarMensajeWhatsApp = (venta: Venta) => {
         ))}`+
 
     `Observaciones: ${venta.observaciones.toUpperCase()}\n\n`+
-
+    `Voy a Pagar con: ${venta.vuelto.toFixed(2)}\n\n`+
     `Total del Pedido: $${(venta.precio - venta.descuento).toFixed(2)}`
     );
     const url = `https://wa.me/${rotiseria.whatsapp}?text=${mensaje}`;

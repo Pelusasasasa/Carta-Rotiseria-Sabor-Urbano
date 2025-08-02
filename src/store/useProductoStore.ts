@@ -5,7 +5,7 @@ export interface Producto {
     _id: string;
     descripcion: string;
     precio: number;
-    img: string;
+    imgCloudinaryPath: string;
     seccion: Seccion;
 };
 
