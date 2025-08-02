@@ -1,13 +1,16 @@
 'use client'
+
 import React, { useEffect, useRef, useState } from 'react'
-import { BsPerson } from 'react-icons/bs'
-import { Input } from './Input'
 import { useForm } from '@/hooks/Useform';
-import { CiLocationOn, CiPhone } from 'react-icons/ci';
 import { useVenta } from '@/hooks/useVenta';
-import Swal from 'sweetalert2';
+
 import { FiMessageSquare } from 'react-icons/fi';
+import { CiLocationOn, CiPhone } from 'react-icons/ci';
 import { LuCreditCard, LuTruck } from 'react-icons/lu';
+import { BsPerson } from 'react-icons/bs'
+
+import Swal from 'sweetalert2';
+import { Input } from './Input';
 import { enviarMensajeWhatsApp } from '@/helpers/enviarMensajeWhatsApp';
 
 const initialForm = {
@@ -15,12 +18,13 @@ const initialForm = {
     direccion: '',
     telefono: '',
     tipo_pago: 'EFECTIVO',
-    envio: "false"
+    envio: "false",
+    vuelto: 0
 }
 
 export const DatosCliente = () => {
 
-    const {nombre, direccion, telefono, tipo_pago, envio, observaciones, onInputChange, formState} = useForm(initialForm);
+    const {nombre, direccion, telefono, tipo_pago, envio, vuelto, observaciones, onInputChange, formState} = useForm(initialForm);
     const { startActivarCliente, startCrearVenta, cerrar  } = useVenta();
     const [validForm, setValidForm] = useState<boolean>(false);
 
@@ -136,6 +140,13 @@ export const DatosCliente = () => {
                     
                 </textarea>
             </div>
+
+            {tipo_pago === 'EFECTIVO' && (
+                <div>
+                    <label htmlFor="">¿Con cuánto vas a pagar? ¡Así llevamos el cambio justo!</label>
+                    <Input placeholder='0.00' type='number' value={vuelto} onChange={onInputChange} name='vuelto' />
+                </div>
+            )}
 
 
             <hr className='text-slate-700 mt-3'/>

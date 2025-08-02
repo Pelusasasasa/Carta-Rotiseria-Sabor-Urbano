@@ -27,6 +27,7 @@ export const useVenta = () => {
                 envio: cliente.envio === 'true' ? true : false,
                 tipo_pago: cliente.tipo_pago || 'EFECTIVO',
                 pasado: false,
+                vuelto: cliente.vuelto || 0,
             };
 
             const { data } = await axios.post('/api/ventas', venta);

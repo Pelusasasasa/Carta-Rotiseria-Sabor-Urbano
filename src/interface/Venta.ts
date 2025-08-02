@@ -15,5 +15,6 @@ export interface Venta {
     pasado: boolean;
     tipo_pago: string;
     envio: boolean;
+    vuelto: number;
 
 }

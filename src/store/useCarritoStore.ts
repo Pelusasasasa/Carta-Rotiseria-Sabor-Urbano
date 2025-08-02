@@ -20,6 +20,7 @@ export interface Cliente {
     telefono: string;
     envio?: string;
     tipo_pago?: string;
+    vuelto: number;
 
 };
 
@@ -39,7 +40,7 @@ interface CarritoState {
 export const useCarritoStore = create<CarritoState>((set, get) => ({
     abierto: false,
     productos: [],
-    cliente: {nombre: '', telefono: '', direccion: '', observaciones: ''},
+    cliente: {nombre: '', telefono: '', direccion: '', observaciones: '', vuelto: 0},
     envio: false,
     tipo_pago: 'EFECTIVO',
     abrir: () => set({abierto: true}),

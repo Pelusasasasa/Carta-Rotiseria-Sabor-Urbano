@@ -60,6 +60,10 @@ const VentaSchema = new Schema({
     pasado: {
         type: Boolean,
         default: false
+    },
+    vuelto: {
+        type: Number,
+        default: 0
     }
 });
 
