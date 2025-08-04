@@ -86,7 +86,7 @@ export const useCarritoStore = create<CarritoState>((set, get) => ({
         let empanadaCantidad = 0;
 
         for(const prod of get().productos){
-            if(prod.producto.seccion.nombre === 'EMPANADAS'){
+            if(prod.producto.seccion?.nombre === 'EMPANADAS'){
                 empanadaCantidad += prod.cantidad;
             }else{
                 total += prod.cantidad * prod.producto.precio;

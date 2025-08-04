@@ -18,7 +18,7 @@ return (
         <div className="flex gap-5 items-center justify-between">
             <div className='flex gap-5 items-center'>
                 <Image src="/images/icon.png" alt={rotiseria.nombre} width={50} height={50}/>
-                <h1 className="text-xl md:text-2xl font-bold">{rotiseria.nombre}</h1>
+                <h1 className="text-xl text-white md:text-2xl font-bold">{rotiseria.nombre}</h1>
             </div>
 
             <div className='cursor-pointer hover:bg-white/20 p-2 hover:rounded-full' onClick={abrir}>
@@ -40,7 +40,7 @@ return (
             <div className='flex gap-5 px-2 mt-2 md:mt-0'>
                 <div className='flex gap-2'>
                     <AiOutlineHome className='text-slate-300'/>
-                    <p className='text-xs hidden md:block text-slate-300'>{rotiseria.direccion}</p>
+                    <a href={rotiseria.ubicacion} target='_blank' className='text-xs hidden md:block text-slate-300'>{rotiseria.direccion}</a>
                 </div>
 
                 <div className='flex gap-2'>

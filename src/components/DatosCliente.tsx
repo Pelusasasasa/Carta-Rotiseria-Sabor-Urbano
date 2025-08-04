@@ -12,7 +12,6 @@ import { BsPerson } from 'react-icons/bs'
 import Swal from 'sweetalert2';
 import { Input } from './Input';
 import { enviarMensajeWhatsApp } from '@/helpers/enviarMensajeWhatsApp';
-import { useCartaEmpanada } from '@/hooks/useCartaEmpanada';
 
 const initialForm = {
     nombre: '',
@@ -143,7 +142,7 @@ export const DatosCliente = () => {
 
             {tipo_pago === 'EFECTIVO' && (
                 <div>
-                    <label htmlFor="">¿Con cuánto vas a pagar? ¡Así llevamos el cambio justo!</label>
+                    <label className='text-white' htmlFor="">¿Con cuánto vas a pagar? ¡Así llevamos el cambio justo!</label>
                     <Input placeholder='0.00' type='number' value={vuelto} onChange={onInputChange} name='vuelto' />
                 </div>
             )}
@@ -152,7 +151,7 @@ export const DatosCliente = () => {
             <hr className='text-slate-700 mt-3'/>
             
             <div className='mt-5'>
-                <button type='submit' className={`py-2 px-2 border border-gray-500 rounded-sm font-bold cursor-pointer w-full ${validForm ? 'bg-yellow-400 text-black hover:bg-yellow-500' : 'bg-gray-700 text-gray-500'}`}>{validForm ? 'Confirmar Pedido' : 'Complete todos los datos para continuar'}</button>
+                <button type='submit' disabled={validForm ? false : true} className={`py-2 px-2 border border-gray-500 rounded-sm font-bold cursor-pointer w-full ${validForm ? 'bg-yellow-400 text-black hover:bg-yellow-500' : 'bg-gray-700 text-gray-500'}`}>{validForm ? 'Confirmar Pedido' : 'Complete todos los datos para continuar'}</button>
             </div>
         </form>
 

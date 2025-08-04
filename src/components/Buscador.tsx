@@ -10,7 +10,7 @@ interface Props {
 
 const Buscador = ({value, setValue}: Props) => {
 return (
-        <Input type='text' Icon={CiSearch} placeholder='Buscar Producto' value={value} onChange={(e) => setValue(e.target.value)}/>
+        <Input type='text' classNameIcon='text-white' Icon={CiSearch} placeholder='Buscar Producto' value={value} onChange={(e) => setValue(e.target.value)}/>
     )
 }
 

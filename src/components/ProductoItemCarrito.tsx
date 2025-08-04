@@ -41,7 +41,7 @@ export const ProductoItemCarrito = ({cantidad, producto:{_id, descripcion, secci
             </div>
 
             <div>
-                {seccion.nombre === 'EMPANADAS' ? (<p className='text-white'>${(calcularPrecioEmpanadas(cantidad, precio, carta)).toFixed(2)}</p>) : (<p className='text-white'>${(precio * cantidad).toFixed(2)}</p>)}
+                {seccion?.nombre === 'EMPANADAS' ? (<p className='text-white'>${(calcularPrecioEmpanadas(cantidad, precio, carta)).toFixed(2)}</p>) : (<p className='text-white'>${(precio * cantidad).toFixed(2)}</p>)}
             </div>
         </div>
     </div>
