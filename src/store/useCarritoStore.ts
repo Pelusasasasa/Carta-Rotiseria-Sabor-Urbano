@@ -8,12 +8,14 @@ export interface Producto {
     descripcion: string;
     precio: number;
     seccion: Seccion;
+    imgCloudinaryPath?: string;
 };
 
 export interface ListaProductos {
    cantidad: number;
    producto: Producto;
    carta: Carta;
+   imgCloudinaryPath?: string;
 };
 
 export interface Cliente {
@@ -80,11 +82,6 @@ export const useCarritoStore = create<CarritoState>((set, get) => ({
     },
     setCliente: (cliente) => set({cliente}),
     total: () => {
-        // const sum = get().productos.reduce(
-        //      (acc, prod) => acc + prod.producto.precio * prod.cantidad,
-        //     0
-        // );
-
         let total = 0;
         let empanadaCantidad = 0;
 
@@ -100,7 +97,7 @@ export const useCarritoStore = create<CarritoState>((set, get) => ({
             const producto = get().productos.find(elem => elem?.producto?.seccion?.nombre === 'EMPANADAS') ;
             total += calcularPrecioEmpanadas(empanadaCantidad, producto?.producto?.precio || 0, producto?.carta || {docena: 0, mediaDocena: 0})
         };
-        console.log(total);
+
         return total;
     },
 }))

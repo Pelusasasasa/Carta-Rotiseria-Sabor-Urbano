@@ -9,10 +9,10 @@ export const calcularPrecioEmpanadas = (cantidadEmpanadas: number, precioEmpanad
     const EmpanadaMediaDocena = carta.mediaDocena;
     const EmpanadaUnidad = precioEmpanadas;
 
+    console.log({EmpanadaDocena, EmpanadaMediaDocena, EmpanadaUnidad})
 
     const docenas = Math.floor(cantidadEmpanadas / DOCENA);
     const restantesTrasDocenas = cantidadEmpanadas % DOCENA;
-
 
     const mediaDocena = Math.floor(restantesTrasDocenas / MEDIA_DOCENA);
     const adicionales = restantesTrasDocenas % MEDIA_DOCENA;

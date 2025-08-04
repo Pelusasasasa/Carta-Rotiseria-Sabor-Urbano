@@ -31,7 +31,6 @@ export const Carrito = () => {
     <div className='fixed inset-0 flex items-center justify-center bg-black/80 '>
       <div style={{backgroundColor: rotiseria.colorPrimario}} className='border border-gray-500 rounded-lg text-center max-h-[90vh] overflow-y-auto h-screen'>
           <div className='flex justify-center relative items-center my-3 '>
-            <h3 className='text-yellow-400 text-xl'>Finalizar Pedido</h3>
             <button className='absolute right-0 mx-2 hover:cursor-pointer'>
               <CgClose className='hover:text-white text-gray-500' onClick={cerrar} size={25}/>
             </button>

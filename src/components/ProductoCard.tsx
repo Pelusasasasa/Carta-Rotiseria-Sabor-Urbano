@@ -12,7 +12,7 @@ const ProductoCard = ({_id, imgCloudinaryPath = '', precio, descripcion, seccion
     const addProducto = () => {
         agregarProducto({
             cantidad: 1,
-            producto: {_id, precio, descripcion, seccion: seccion },
+            producto: {_id, precio, descripcion, seccion: seccion, imgCloudinaryPath },
             carta
         })
     };
@@ -21,7 +21,7 @@ const ProductoCard = ({_id, imgCloudinaryPath = '', precio, descripcion, seccion
         console.log(carta);
         agregarProducto({
             cantidad: 6,
-            producto: {_id, precio, descripcion, seccion: seccion },
+            producto: {_id, precio, descripcion, seccion: seccion, imgCloudinaryPath },
             carta
         })
     };
@@ -29,7 +29,7 @@ const ProductoCard = ({_id, imgCloudinaryPath = '', precio, descripcion, seccion
     const addProductoPor12 = () => {
         agregarProducto({
             cantidad: 12,
-            producto: {_id, precio, descripcion, seccion: seccion },
+            producto: {_id, precio, descripcion, seccion: seccion , imgCloudinaryPath},
             carta
         })
     };

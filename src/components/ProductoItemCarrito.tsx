@@ -1,26 +1,28 @@
+import { calcularPrecioEmpanadas } from '@/helpers/calcularPrecioEmpanadas'
+import { useCartaEmpanada } from '@/hooks/useCartaEmpanada'
 import { ListaProductos,  useCarritoStore } from '@/store/useCarritoStore'
 import Image from 'next/image'
 import React from 'react'
 
 
 
-export const ProductoItemCarrito = ({cantidad, producto:{_id, descripcion, seccion, precio}}: ListaProductos) => {
-
-    const { agregarProducto, quitarProducto } = useCarritoStore()
+export const ProductoItemCarrito = ({cantidad, producto:{_id, descripcion, seccion, precio, imgCloudinaryPath}}: ListaProductos) => {
+    const { carta } = useCartaEmpanada();
+    const { agregarProducto, quitarProducto } = useCarritoStore();
 
     const restarProducto = () => {
         quitarProducto(_id)
     };
 
     const sumarProducto = () => {
-        agregarProducto({cantidad: 1, producto: {_id, descripcion, precio, seccion}})
+        agregarProducto({cantidad: 1, producto: {_id, descripcion, precio, seccion}, carta})
     };
 
   return (
     <div className='flex bg-slate-800 my-5 p-2 rounded-sm gap-2'>
         
         <div className='bg-white h-10 w-10 rounded-sm'>
-                {/* <Image src={`${ip}/${_id}.png`} alt={descripcion} width={20} height={20}/> */}
+                <Image src={imgCloudinaryPath || ''} alt={descripcion} className='h-10 w-10 object-contain' width={64} height={64}/>
         </div>
 
         <div className='flex flex-col w-[230px]'>
@@ -39,7 +41,7 @@ export const ProductoItemCarrito = ({cantidad, producto:{_id, descripcion, secci
             </div>
 
             <div>
-                <p className='text-white'>${(precio * cantidad).toFixed(2)}</p>
+                {seccion.nombre === 'EMPANADAS' ? (<p className='text-white'>${(calcularPrecioEmpanadas(cantidad, precio, carta)).toFixed(2)}</p>) : (<p className='text-white'>${(precio * cantidad).toFixed(2)}</p>)}
             </div>
         </div>
     </div>
