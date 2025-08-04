@@ -26,11 +26,11 @@ export const Rubros = () => {
     }
 
   return (
-    <div className='flex gap-5 w-full'>
+    <div className='flex gap-5 overflow-x-auto pb-2'>
         {
             secciones.map((seccion) => (
-                <div onClick={() => handleSeccion(seccion)} key={seccion?.nombre} className={`${seccionActive?.nombre === seccion?.nombre ? 'bg-yellow-400 hover:bg-yellow-500' : 'bg-gray-400'} p-1 rounded-sm mt-2 hover:bg-slate-500 cursor-pointer `}>
-                    <p className='text-gray-700 text-xs font-bold hover:text-white'>{seccion?.nombre}</p>
+                <div onClick={() => handleSeccion(seccion)} key={seccion?.nombre} className={`${seccionActive?.nombre === seccion?.nombre ? 'bg-yellow-400 hover:bg-yellow-500' : 'bg-gray-400'} p-1 rounded-sm mt-2 hover:bg-slate-500 cursor-pointer`}>
+                    <p className='text-gray-700 text-xs whitespace-nowrap font-bold hover:text-white'>{seccion?.nombre}</p>
                 </div>
             ))
         }

@@ -48,7 +48,7 @@ export const Productos = ({ value }: Props) => {
   };
 
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-15 my-5 bg-slate-800 h-[60vh] px-5 overflow-y-scroll py-4'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-15 mt-1  bg-slate-800 h-[60vh] px-5 overflow-y-scroll pt14'>
       {productosFiltrados.map(elem => (
         <ProductoCard key={elem._id} {...elem}/>
       ))}

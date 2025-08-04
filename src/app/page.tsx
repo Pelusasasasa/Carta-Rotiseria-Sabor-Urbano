@@ -34,9 +34,9 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen min-w-screen flex flex-col" style={{backgroundColor: rotiseria.colorPrimario}}>
+    <main className="h-screen min-w-screen flex flex-col" style={{backgroundColor: rotiseria.colorPrimario}}>
       <Analytics/>
-      <div className="pt-5 h-full w-full">
+      <div className="pt-0 w-full">
         <div className="mx-10">
           <Header/>
 

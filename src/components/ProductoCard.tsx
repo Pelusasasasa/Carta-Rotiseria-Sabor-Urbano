@@ -36,9 +36,9 @@ const ProductoCard = ({_id, imgCloudinaryPath = '', precio, descripcion, seccion
 
   return (
     <div className='h-[235px]'>
-        <div className='flex flex-col items-center bg-slate-700 h-full rounded-sm py-5'>
-            <div className='bg-white h-16 w-16 rounded-sm'>
-                {imgCloudinaryPath && <Image src={`${imgCloudinaryPath}`} alt={descripcion} className='h-16 w-16 object-contain' width={64} height={64}/>}
+        <div className='flex flex-col items-center bg-slate-700 h-full rounded-sm py-3 my-2'>
+            <div className='bg-white h-16 w-16 rounded-lg'>
+                {<Image src={`${imgCloudinaryPath ? imgCloudinaryPath : '/images/icon.png'}`} alt={descripcion} className='h-16 w-16 object-contain rounded-sm' width={64} height={64}/>}
             </div>
 
             <div>
