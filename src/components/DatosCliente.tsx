@@ -12,6 +12,7 @@ import { BsPerson } from 'react-icons/bs'
 import Swal from 'sweetalert2';
 import { Input } from './Input';
 import { enviarMensajeWhatsApp } from '@/helpers/enviarMensajeWhatsApp';
+import { useCartaEmpanada } from '@/hooks/useCartaEmpanada';
 
 const initialForm = {
     nombre: '',
@@ -23,7 +24,6 @@ const initialForm = {
 }
 
 export const DatosCliente = () => {
-
     const {nombre, direccion, telefono, tipo_pago, envio, vuelto, observaciones, onInputChange, formState} = useForm(initialForm);
     const { startActivarCliente, startCrearVenta, cerrar  } = useVenta();
     const [validForm, setValidForm] = useState<boolean>(false);

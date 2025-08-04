@@ -1,5 +1,7 @@
+import { calcularPrecioEmpanadas } from '@/helpers/calcularPrecioEmpanadas';
 import { Seccion } from '@/interface/Seccion';
 import { create } from 'zustand';
+import { Carta } from './useCartaEmpenadaStore';
 
 export interface Producto {
     _id: string;
@@ -11,6 +13,7 @@ export interface Producto {
 export interface ListaProductos {
    cantidad: number;
    producto: Producto;
+   carta: Carta;
 };
 
 export interface Cliente {
@@ -55,8 +58,9 @@ export const useCarritoStore = create<CarritoState>((set, get) => ({
                     productos: state.productos.map((prod) => prod.producto._id === producto.producto._id ? {...prod, cantidad: prod.cantidad + producto.cantidad} : prod),
                 };
             };
-            return { productos: [...state.productos, {...producto, cantidad: 1}]}
-        })
+            return { productos: [...state.productos, {...producto, cantidad: producto.cantidad || 1}]}
+        });
+
     },
 
     quitarProducto: (id) => {
@@ -76,11 +80,27 @@ export const useCarritoStore = create<CarritoState>((set, get) => ({
     },
     setCliente: (cliente) => set({cliente}),
     total: () => {
-        const sum = get().productos.reduce(
-             (acc, prod) => acc + prod.producto.precio * prod.cantidad,
-            0
-        );
-        
-        return sum;
+        // const sum = get().productos.reduce(
+        //      (acc, prod) => acc + prod.producto.precio * prod.cantidad,
+        //     0
+        // );
+
+        let total = 0;
+        let empanadaCantidad = 0;
+
+        for(const prod of get().productos){
+            if(prod.producto.seccion.nombre === 'EMPANADAS'){
+                empanadaCantidad += prod.cantidad;
+            }else{
+                total += prod.cantidad * prod.producto.precio;
+            }
+        };
+
+        if(empanadaCantidad > 0){
+            const producto = get().productos.find(elem => elem?.producto?.seccion?.nombre === 'EMPANADAS') ;
+            total += calcularPrecioEmpanadas(empanadaCantidad, producto?.producto?.precio || 0, producto?.carta || {docena: 0, mediaDocena: 0})
+        };
+        console.log(total);
+        return total;
     },
 }))

@@ -27,35 +27,35 @@ return (
                 
             </div>
         </div>
-        <div className='bg-slate-800 rounded-sm py-2 w-full flex justify-between'>
+        <div className='bg-slate-800 rounded-sm py-2 w-full flex flex-col md:flex-row justify-between'>
             <div className='flex gap-2 px-2'>
                 <FiClock className='text-yellow-400 mt-1'/>
                 <p className='text-yellow-400 flex flex-col'>Horarios 
                     {rotiseria.horarios.map(hora => (
-                        <span key={hora} className='text-white'>{hora}</span>
+                        <span key={hora} className='text-white text-xs md:text-sm'>{hora}</span>
                     ))}
                 </p>
             </div>
 
-            <div className='flex gap-5 px-2'>
+            <div className='flex gap-5 px-2 mt-2 md:mt-0'>
                 <div className='flex gap-2'>
                     <AiOutlineHome className='text-slate-300'/>
-                    <p className='text-xs text-slate-300'>{rotiseria.direccion}</p>
+                    <p className='text-xs hidden md:block text-slate-300'>{rotiseria.direccion}</p>
                 </div>
 
                 <div className='flex gap-2'>
                     <FiPhone  className='text-slate-300'/>
-                    <p className='text-xs text-slate-300'>{rotiseria.whatsapp}</p>
+                    <p className='text-xs hidden md:block text-slate-300'>{rotiseria.whatsapp}</p>
                 </div>
 
                 <div className='flex gap-2'>
                     <AiOutlineInstagram  className='text-slate-300'/>
-                    <a href={`${rotiseria.instagram}`} target='_blank' className='text-xs text-slate-300'>Instagram</a>
+                    <a href={`${rotiseria.instagram}`} target='_blank' className='text-xs hidden md:block text-slate-300'>Instagram</a>
                 </div>
 
                 <div className='flex gap-2'>
                     <FaWhatsapp   className='text-slate-300'/>
-                    <a href={`${rotiseria.urlWhatsApp}`} target='_blank' className='text-xs text-slate-300'>Instagram</a>
+                    <a href={`${rotiseria.urlWhatsApp}`} target='_blank' className='text-xs hidden md:block text-slate-300'>Instagram</a>
                 </div>
             </div>
         </div>

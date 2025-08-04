@@ -29,7 +29,7 @@ export const useVenta = () => {
                 pasado: false,
                 vuelto: cliente.vuelto || 0,
             };
-
+            
             const { data } = await axios.post('/api/ventas', venta);
 
             if(data.ok){

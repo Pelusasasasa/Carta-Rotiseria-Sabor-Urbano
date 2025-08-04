@@ -11,9 +11,11 @@ import { useEffect, useState } from "react";
 import { Analytics } from "@vercel/analytics/next"
 import { useVariable } from "@/hooks/useVariable";
 import { ModalPaginaCerrada } from "@/components/ModalPaginaCerrada";
+import { useCartaEmpanada } from "@/hooks/useCartaEmpanada";
 
 
 export default function Home() {
+  const { startTraerCarta } = useCartaEmpanada();
   const { abierto } = useCarritoStore();
   const [value, setValue] = useState<string>('');
   const {variable, startGetVariable } = useVariable();
@@ -21,12 +23,12 @@ export default function Home() {
   useEffect(() => {
     startGetVariable();
   }, []);
-
+  
   useEffect(() => {
-    console.log(variable);
-  }, [variable]);
+    startTraerCarta();
+  }, []);
 
-  if(!variable?.paginaWebAbierto){
+  if(variable?.paginaWebAbierto === false){
     return <ModalPaginaCerrada/>
       
   }
