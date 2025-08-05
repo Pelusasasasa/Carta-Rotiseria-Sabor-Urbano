@@ -10,7 +10,6 @@ export const useProductos = () => {
         try {
             setLoading();
             const { data } = await axios.get(`/api/productos`);
-            // console.log(data)
             if(data.ok){
                 cargarProductos(data.productos);
                 return data.ok;

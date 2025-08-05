@@ -6,4 +6,5 @@ export interface Producto{
     descripcion: string;
     precio: number;
     seccion: Seccion;
+    sinStock?: boolean;
 }

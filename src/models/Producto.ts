@@ -16,6 +16,10 @@ const ProductoSchema = new Schema({
     imgCloudinaryPath: {
         type: String,
         default: ''
+    },
+    sinStock: {
+        type: Boolean,
+        default: false
     }
 });
 

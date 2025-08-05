@@ -9,6 +9,7 @@ export interface Producto {
     precio: number;
     seccion: Seccion;
     imgCloudinaryPath?: string;
+    sinStock?: boolean;
 };
 
 export interface ListaProductos {
@@ -16,6 +17,7 @@ export interface ListaProductos {
    producto: Producto;
    carta: Carta;
    imgCloudinaryPath?: string;
+   sinStock?: boolean;
 };
 
 export interface Cliente {
