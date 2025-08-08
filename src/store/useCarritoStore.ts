@@ -55,11 +55,11 @@ export const useCarritoStore = create<CarritoState>((set, get) => ({
 
     agregarProducto: (producto) => {
         set((state) => {
-            const existe = state.productos.find(prod => prod.producto._id === producto.producto._id);
+            const existe = state.productos.find(prod => prod.producto?._id === producto.producto?._id);
 
             if (existe){
                 return {
-                    productos: state.productos.map((prod) => prod.producto._id === producto.producto._id ? {...prod, cantidad: prod.cantidad + producto.cantidad} : prod),
+                    productos: state.productos.map((prod) => prod.producto?._id === producto.producto?._id ? {...prod, cantidad: prod.cantidad + producto.cantidad} : prod),
                 };
             };
             return { productos: [...state.productos, {...producto, cantidad: producto.cantidad || 1}]}
@@ -69,13 +69,13 @@ export const useCarritoStore = create<CarritoState>((set, get) => ({
 
     quitarProducto: (id) => {
         set((state) => {
-            const existe = state.productos.find(prod => prod.producto._id === id);
+            const existe = state.productos.find(prod => prod.producto?._id === id);
             if(existe && existe?.cantidad > 1){
                 return {
-                    productos: state.productos.map((prod) => prod.producto._id === id ? {...prod, cantidad: prod.cantidad - 1}: prod)
+                    productos: state.productos.map((prod) => prod.producto?._id === id ? {...prod, cantidad: prod.cantidad - 1}: prod)
                 };
             };
-            return {productos: [...state.productos.filter(prod => prod.producto._id !== id)]}
+            return {productos: [...state.productos.filter(prod => prod.producto?._id !== id)]}
         })
     },
     

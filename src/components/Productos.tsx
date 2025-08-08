@@ -24,7 +24,7 @@ export const Productos = ({ value }: Props) => {
       setProductosFiltrados(productos.filter(producto => producto.descripcion.toLowerCase().startsWith(value.toLowerCase())));
     }else{
         if(seccionActive?.nombre !== 'TODOS'){
-          setProductosFiltrados(productos.filter(producto => producto.seccion._id === seccionActive?._id))
+          setProductosFiltrados(productos.filter(producto => producto.seccion?._id === seccionActive?._id))
         }else{
           setProductosFiltrados(productos);
         }
@@ -50,7 +50,7 @@ export const Productos = ({ value }: Props) => {
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-15 mt-1  bg-slate-800 h-[60vh] px-5 overflow-y-scroll pt14'>
       {productosFiltrados.map(elem => (
-        <ProductoCard key={elem._id} {...elem}/>
+        <ProductoCard key={elem?._id} {...elem}/>
       ))}
     </div>
   )
