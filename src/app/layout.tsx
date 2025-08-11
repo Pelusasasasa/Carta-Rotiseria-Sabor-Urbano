@@ -23,8 +23,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
+        <meta httpEquiv="Content-Language" content="es"/>
+        <meta name="google" content="notranslate" />
         <link rel="shortcut icon" href="/icon.png" type="image/x-icon" />
       </head>
       <body
