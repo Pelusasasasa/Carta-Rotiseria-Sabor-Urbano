@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { IoMdAdd } from 'react-icons/io'
+import { IoIosAddCircleOutline, IoMdAdd } from 'react-icons/io'
 import { Producto } from '@/interface/Producto'
 import { useCarritoStore } from '@/store/useCarritoStore'
 import { useCartaEmpanada } from '@/hooks/useCartaEmpanada'
@@ -63,7 +63,7 @@ const ProductoCard = ({_id, imgCloudinaryPath = '', precio, descripcion, seccion
             </div>
 
             {seccion?.nombre !== 'EMPANADAS' && <div onClick={addProducto} className='flex mt-auto bg-yellow-400 w-[90%] py-1 rounded-sm hover:bg-yellow-500 justify-center mx-10 items-center gap-5 cursor-pointer'>
-                    <IoMdAdd color='black' size={20}/>
+                    <IoIosAddCircleOutline  color='black' size={20}/>
                     <button className='text-black' disabled={sinStock}>Agregar</button>
                 </div>
             }
