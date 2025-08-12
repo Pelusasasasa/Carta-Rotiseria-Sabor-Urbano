@@ -55,9 +55,9 @@ const ProductoCard = ({_id, imgCloudinaryPath = '', precio, descripcion, seccion
             </div>
 
             <div>
-                <h2 className='font-bold mt-2 text-md text-center text-white'>{descripcion}</h2>
+                <h2 translate='no' className='font-bold mt-2 text-md text-center text-white'>{descripcion}</h2>
 
-                <p className='text-center  text-gray-400'>{seccion?.nombre}</p>
+                <p translate='no' className='text-center  text-gray-400'>{seccion?.nombre}</p>
 
                 <p className='text-center text-yellow-400 text-xl font-bold'>${precio.toFixed(2)}</p>
             </div>
