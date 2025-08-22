@@ -24,7 +24,7 @@ export const Footer = () => {
         </div>
 
         <div className='md:ml-auto mt-3 mr-2 items-center flex justify-center'>
-          <a className='text-center text-xs' href="https://www.agustin-lorenzatto.com.ar/">Desarrollado por PelusaDev</a>
+          <a className='text-center text-white text-xs' href="https://www.agustin-lorenzatto.com.ar/">Desarrollado por PelusaDev</a>
         </div>
       </footer>
   )
