@@ -51,9 +51,11 @@ export const DatosCliente = () => {
 
     const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
+        setValidForm(false);
         const {ok, venta, error} = await startCrearVenta();
 
         if(ok){
+            setValidForm(true);
             const { isConfirmed } = await Swal.fire({
                 title: 'Pedido Cargado con exito',
                 text: 'Enviar Confirmacion por WhatsApp Por Favor',
