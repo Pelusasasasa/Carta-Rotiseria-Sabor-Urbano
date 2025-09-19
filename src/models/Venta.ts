@@ -19,7 +19,7 @@ const VentaSchema = new Schema({
     },
     direccion: {
         type: String,
-        required: true
+        default: ''
     },
     observaciones: {
         type: String,
