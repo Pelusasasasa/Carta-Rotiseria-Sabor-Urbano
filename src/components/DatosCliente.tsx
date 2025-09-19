@@ -5,7 +5,7 @@ import { useForm } from '@/hooks/Useform';
 import { useVenta } from '@/hooks/useVenta';
 
 import { FiMessageSquare } from 'react-icons/fi';
-import { CiLocationOn, CiPhone } from 'react-icons/ci';
+import { CiLight, CiLocationOn, CiPhone } from 'react-icons/ci';
 import { LuCreditCard, LuTruck } from 'react-icons/lu';
 import { BsPerson } from 'react-icons/bs'
 
@@ -26,14 +26,29 @@ export const DatosCliente = () => {
     const {nombre, direccion, telefono, tipo_pago, envio, vuelto, observaciones, onInputChange, formState} = useForm(initialForm);
     const { startActivarCliente, startCrearVenta, cerrar  } = useVenta();
     const [validForm, setValidForm] = useState<boolean>(false);
+    const [inputDireccion, setInputDireccion] = useState<boolean>(false);
 
     const direccionRef = useRef<HTMLInputElement>(null);
     const telefonoRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        if(!nombre || nombre === '') return setValidForm(false);
-        if(!direccion || direccion === '') return setValidForm(false);
-        if(!telefono || telefono === '') return setValidForm(false);
+        setInputDireccion(envio == 'false' ? false : true);
+        if((!direccion || direccion === '') && inputDireccion) return setValidForm(false);
+    }, [envio]);
+
+    useEffect(() => {
+        if(!validarFormulario()){
+            return setValidForm(false);
+        };
+
+        setValidForm(true);
+        startActivarCliente(formState)
+    }, [inputDireccion])
+    
+    useEffect(() => {
+        if(!validarFormulario()){
+            return setValidForm(false);
+        };
 
         setValidForm(true);
         startActivarCliente(formState)
@@ -55,6 +70,7 @@ export const DatosCliente = () => {
         const {ok, venta, error} = await startCrearVenta();
 
         if(ok){
+            
             setValidForm(true);
             const { isConfirmed } = await Swal.fire({
                 title: 'Pedido Cargado con exito',
@@ -72,7 +88,15 @@ export const DatosCliente = () => {
         }
     };
 
-  return (
+    const validarFormulario = () => {
+        if(!nombre || nombre === '') return false;
+        if((!direccion || direccion == '') && inputDireccion) return false;
+        if(!telefono || telefono === '') return false;
+        return true;
+    };
+
+
+return (
     <div className='flex flex-col items-starts space-y-4'>
         <h3 className='text-yellow-400 text-lg text-start'>Datos de entregar (Obligatorio)</h3>
         <hr className='text-gray-700'/>
@@ -85,15 +109,6 @@ export const DatosCliente = () => {
                 </div>
 
                 <Input type='text' placeholder='Ingrese su nombre' name='nombre' value={nombre} onChange={onInputChange} onKeyDown={((e) => handleKeyDown(e, direccionRef as React.RefObject<HTMLInputElement>))}/>
-            </div>
-
-            <div className='mt-3'>
-                <div className='flex gap-5 items-center'>
-                    <CiLocationOn  className='text-white' />
-                    <label className='text-white' htmlFor="direccion">Direccion *</label>
-                </div>
-
-                <Input type='text' placeholder='Ingrese su direccion' ref={direccionRef as React.RefObject<HTMLInputElement>} name='direccion' value={direccion} onChange={onInputChange} onKeyDown={((e) => handleKeyDown(e, telefonoRef as React.RefObject<HTMLInputElement>))}/>
             </div>
 
             <div className='mt-3'>
@@ -117,6 +132,7 @@ export const DatosCliente = () => {
                         <option value="TRANSFERENCIA">Transferencia</option>
                     </select>
                 </div>
+                
 
                 <div>
                     <div className='flex gap-5 items-center'>
@@ -129,6 +145,15 @@ export const DatosCliente = () => {
                     </select>
                 </div>
 
+            </div>
+
+            <div className={`mt-3 ${inputDireccion ? '' : 'hidden'}`}>
+                <div className='flex gap-5 items-center'>
+                    <CiLocationOn  className='text-white' />
+                    <label className='text-white' htmlFor="direccion">Direccion *</label>
+                </div>
+
+                <Input type='text' placeholder='Ingrese su direccion' ref={direccionRef as React.RefObject<HTMLInputElement>} name='direccion' value={direccion} onChange={onInputChange} onKeyDown={((e) => handleKeyDown(e, telefonoRef as React.RefObject<HTMLInputElement>))}/>
             </div>
 
             <div className='mt-3'>

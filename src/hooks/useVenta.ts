@@ -22,7 +22,7 @@ export const useVenta = () => {
                 tipo_venta: 'CD',
                 tipo_comp: 'Comprobante',
                 dispositivo: 'WEB',
-                direccion: cliente.direccion,
+                direccion: cliente.direccion || '',
                 telefono: cliente.telefono,
                 envio: cliente.envio === 'true' ? true : false,
                 tipo_pago: cliente.tipo_pago || 'EFECTIVO',
