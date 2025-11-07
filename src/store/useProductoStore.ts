@@ -7,6 +7,7 @@ export interface Producto {
     precio: number;
     imgCloudinaryPath: string;
     seccion: Seccion;
+    observaciones?: string;
 };
 
 interface ProductoState {
@@ -21,10 +22,10 @@ interface ProductoState {
 export const useProductoStore = create<ProductoState>((set) => ({
     productos: [],
     loading: false,
-    setLoading: () => set({ loading: true}),
-    cargarProductos: (nuevos) => set({ 
+    setLoading: () => set({ loading: true }),
+    cargarProductos: (nuevos) => set({
         productos: nuevos,
         loading: false
-     }),
+    }),
     limpiarProductos: () => set({ productos: [] })
 }))

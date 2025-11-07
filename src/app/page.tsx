@@ -18,39 +18,39 @@ export default function Home() {
   const { startTraerCarta } = useCartaEmpanada();
   const { abierto } = useCarritoStore();
   const [value, setValue] = useState<string>('');
-  const {variable, startGetVariable } = useVariable();
+  const { variable, startGetVariable } = useVariable();
 
   useEffect(() => {
     startGetVariable();
   }, []);
-  
+
   useEffect(() => {
     startTraerCarta();
   }, []);
 
-  if(variable?.paginaWebAbierto === false){
-    return <ModalPaginaCerrada/>
-      
+  if (variable?.paginaWebAbierto === false) {
+    return <ModalPaginaCerrada />
+
   }
 
   return (
-    <main className="h-screen min-w-screen flex flex-col" style={{backgroundColor: rotiseria.colorPrimario}}>
-      <Analytics/>
+    <main className="h-screen min-w-screen flex flex-col" style={{ backgroundColor: rotiseria.colorPrimario }}>
+      <Analytics />
       <div className="pt-0 w-full">
-        <div className="mx-10">
-          <Header/>
+        <div className="mx-3 md:mx-7">
+          <Header />
 
           <Buscador value={value} setValue={setValue} />
 
-          <Rubros/>
+          <Rubros />
         </div>
 
-        <Productos value={value}/>
+        <Productos value={value} />
       </div>
 
-      <Footer/>
+      <Footer />
 
-      {abierto && <Carrito/>}
+      {abierto && <Carrito />}
     </main>
   )
 }

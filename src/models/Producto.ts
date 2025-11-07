@@ -20,6 +20,11 @@ const ProductoSchema = new Schema({
     sinStock: {
         type: Boolean,
         default: false
+    },
+    observaciones: {
+        type: String,
+        trim: true,
+        default: ''
     }
 });
 
