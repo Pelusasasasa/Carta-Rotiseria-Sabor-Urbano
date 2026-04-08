@@ -67,7 +67,7 @@ export const DatosCliente = () => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
-    siguiente: React.RefObject<HTMLInputElement> | null
+    siguiente: React.RefObject<HTMLInputElement> | null,
   ) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -100,7 +100,7 @@ export const DatosCliente = () => {
       await Swal.fire(
         "No se pudo generar el pedido",
         error.response?.data?.error,
-        "error"
+        "error",
       );
     }
   };
@@ -108,7 +108,10 @@ export const DatosCliente = () => {
   const validarFormulario = () => {
     if (!nombre || nombre === "") return false;
     if ((!direccion || direccion == "") && inputDireccion) return false;
-    if (!telefono || telefono === "") return false;
+
+    const phoneRegex = /^\d{8,15}$/;
+    if (!telefono || !phoneRegex.test(telefono)) return false;
+
     return true;
   };
 
@@ -136,7 +139,7 @@ export const DatosCliente = () => {
             onKeyDown={(e) =>
               handleKeyDown(
                 e,
-                direccionRef as React.RefObject<HTMLInputElement>
+                direccionRef as React.RefObject<HTMLInputElement>,
               )
             }
           />
@@ -151,7 +154,7 @@ export const DatosCliente = () => {
           </div>
 
           <Input
-            type="text"
+            type="tel"
             placeholder="Ingrese su Telefono"
             ref={telefonoRef as React.RefObject<HTMLInputElement>}
             name="telefono"
